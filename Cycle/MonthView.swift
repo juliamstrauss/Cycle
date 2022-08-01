@@ -4,6 +4,8 @@
 //
 //  Created by Julia Strauss on 6/24/22.
 //
+// This view provides the month title and arrangement of DayViews
+//
 
 import SwiftUI
 
@@ -11,19 +13,10 @@ struct ContentView: View {
     @ObservedObject var dataManager : DataManager
     
     var body: some View {
-        //Background
         VStack {
-            /*ZStack {
-                RadialGradient(gradient: Gradient(colors: [Color(red: 237/255, green: 209/255, blue: 185/255), Color(red: 237/255, green: 185/255, blue: 201/255)]), center: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/)
-            }.ignoresSafeArea()*/
-            //add menu for month here
             Text("\(dataManager.monthTitle)").font(.largeTitle).foregroundColor(Color(red: 199/255.0, green:75/255.0, blue: 75/255.0))
-            /*Menu("Menu") {
-                Button("April", action: aprilSelected)
-                Button("May", action: maySelected)
-                Button("June", action: juneSelected)
-            }*/
-         
+            
+            //Create a DayView for each day of the month, each day shares our DataManager
             VStack {
                 HStack {
                     DayView(dayType: 1, dataManager: dataManager)
@@ -67,8 +60,10 @@ struct ContentView: View {
                     DayView(dayType: 29, dataManager: dataManager)
                     DayView(dayType: 30, dataManager: dataManager)
                 }
+                //Make sure each month has the appropriate number of days
+                //April, July, August, October, and December have 31 days
                 HStack {
-                    if (dataManager.currentMonth == 0422 || dataManager.currentMonth == 0722 || dataManager.currentMonth == 0822 || dataManager.currentMonth == 1022 || dataManager.currentMonth == 1222) {
+                    if (dataManager.currentMonth == 0422 || dataManager.currentMonth == 0722 || dataManager.currentMonth == 0822 ||  dataManager.currentMonth == 1022 ||  dataManager.currentMonth == 1222) {
                         DayView(dayType: 31, dataManager: dataManager)
                     }
                 }

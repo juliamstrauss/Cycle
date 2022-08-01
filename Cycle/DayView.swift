@@ -4,15 +4,13 @@
 //
 //  Created by Julia Strauss on 6/24/22.
 //
+//This view represents a single day. It contains a button that reacts when pressed (changes colour and updates relevant day information in DataManager)
+//
 
 import SwiftUI
 
 struct DayView: View {
     var dayType : Int
-    //DONE: does every day view have a different data manager?? is that a problem?? YES AND YES
-    //is there a way we can only have the datamanager in the contentview?? how would that work
-    //idea: could we pass in the data manager through the creation of dayview???? let's try
-    //it worked!! :)
     @ObservedObject var dataManager : DataManager
     
     private func buttonColor(timesPressed : Int) -> Color {
@@ -31,6 +29,7 @@ struct DayView: View {
     }
     
     var body: some View {
+        
         Button("\(dayType)"){
             print("button clicked")
             dataManager.currentArrays[dayType - 1] = dataManager.currentArrays[dayType - 1] + 1
@@ -39,7 +38,6 @@ struct DayView: View {
             .frame(width: 60.0, height: 60.0)
             .background(buttonColor(timesPressed: dataManager.currentArrays[dayType-1])).clipShape(Circle())
         .buttonStyle(PlainButtonStyle())
-            
     }
 }
 

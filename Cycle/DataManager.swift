@@ -27,6 +27,7 @@ public class DataManager : ObservableObject {
     
     let defaults = UserDefaults.standard
     
+    //Get data from UserDefaults and save to month arrays
     init() {
         if let tempApril = defaults.object(forKey: "April 2022") as? [Int] {
             April22s = tempApril
@@ -56,11 +57,11 @@ public class DataManager : ObservableObject {
             October22s = tempOct
             print("October data initialized")
         }
-        
     }
     
+    //Function called from CalendarView whenever we go to a different month
     func changeMonth(previousMonth : Int, nextMonth : Int) {
-        //first, update any data changes, including updating user defaults
+        //First, update any data changes, including updating user defaults
         switch (currentMonth) {
         case 0422:
             April22s = currentArrays
@@ -104,10 +105,10 @@ public class DataManager : ObservableObject {
             break
         }
     
-        //then, update current month
+        //Then, update current month
         currentMonth = nextMonth
         
-        //then, update circles to have that month's data
+        //Then, update circles to have the new month's data
         switch (currentMonth) {
         case 0422:
             monthTitle = "April 2022"

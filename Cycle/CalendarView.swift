@@ -4,21 +4,26 @@
 //
 //  Created by Julia Strauss on 7/31/22.
 //
+// This view initializes our DataManager and provides access to each month via NavigationLinks to MonthView
+//
 
 import SwiftUI
 
 struct CalendarView: View {
     @ObservedObject var dataManager = DataManager()
+    
     var body: some View {
         NavigationView {
             VStack {
                 Image("cycle main page")
                 Spacer()
+                
+                //HStack with NavigationLinks to April, May, and June
                 HStack {
                     Spacer()
                     NavigationLink(destination: ContentView(dataManager: dataManager)) {
                         Text("April").foregroundColor(Color(red: 239/255.0, green:154/255.0, blue:  174/255.0)).font(.title2)
-                    }.simultaneousGesture(TapGesture().onEnded{
+                    }.simultaneousGesture(TapGesture().onEnded{ //When the NavigationLinks are clicked, also call changeMonth function
                         print("April selected")
                         let currentMonth = dataManager.currentMonth
                         dataManager.changeMonth(previousMonth: currentMonth, nextMonth: 0422)
@@ -42,6 +47,7 @@ struct CalendarView: View {
                     Spacer()
                 }
                 Spacer()
+                //HStack with NavigationLinks to July, August, and September
                 HStack {
                     Spacer()
                     NavigationLink(destination: ContentView(dataManager: dataManager)) {
@@ -70,6 +76,7 @@ struct CalendarView: View {
                     Spacer()
                 }
                 Spacer()
+                //HStack with NavigationLinks to October, November, and December
                 HStack {
                     Spacer()
                     NavigationLink(destination: ContentView(dataManager: dataManager)) {
